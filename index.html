@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Same Evidence. Your Judgment.</title>
+<style>
+:root{--bg:#faf8f4;--card:#fff;--ink:#1c1b19;--mute:#6b675f;--line:#e2ddd3;--acc:#1f5f5b;--accink:#fff;--warn:#8a5a00;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141413;--card:#1e1d1b;--ink:#efece5;--mute:#a09b90;--line:#34322e;--acc:#6fc2bb;--accink:#0d1f1e;--warn:#e0b05a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141413;--card:#1e1d1b;--ink:#efece5;--mute:#a09b90;--line:#34322e;--acc:#6fc2bb;--accink:#0d1f1e;--warn:#e0b05a;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Georgia,"Iowan Old Style",serif}
+main{max-width:640px;margin:0 auto;padding:20px 18px 56px}
+h1{font-size:2rem;line-height:1.15;margin:.2em 0 .4em;letter-spacing:-.01em}
+h2{font-size:1.25rem;margin:1.4em 0 .4em}
+p{margin:.6em 0}
+.sans,button,input,select,textarea,label,.tag{font-family:-apple-system,system-ui,"Segoe UI",Roboto,sans-serif}
+.mute{color:var(--mute)}.small{font-size:.88rem}
+.lede{font-size:1.05rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.entry{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:10px 0;color:var(--ink);font-size:1rem;cursor:pointer}
+.entry b{display:block;font-size:1.05rem;color:var(--acc)}
+.entry span{color:var(--mute);font-size:.92rem}
+button.p{background:var(--acc);color:var(--accink);border:0;border-radius:10px;padding:13px 18px;font-size:1rem;font-weight:600;cursor:pointer;min-height:48px}
+button.p:disabled{opacity:.45}
+button.g{background:none;border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:11px 14px;font-size:.95rem;cursor:pointer;min-height:44px}
+.back{background:none;border:0;color:var(--acc);font-size:.95rem;padding:8px 0;cursor:pointer}
+label{display:block;font-weight:600;font-size:.92rem;margin:14px 0 6px}
+textarea,input[type=text],select{width:100%;font-size:16px;padding:11px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+textarea{min-height:120px;resize:vertical}
+.opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:11px 12px;margin:8px 0;font-weight:400;cursor:pointer;background:var(--bg)}
+.opt input{margin-top:4px;accent-color:var(--acc)}
+.opt small{display:block;color:var(--mute)}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:99px;border:1px solid var(--line);color:var(--mute)}
+.st-adopted{color:var(--acc);border-color:var(--acc)}.st-exam{color:var(--warn);border-color:var(--warn)}
+blockquote{margin:.6em 0;padding:.2em 0 .2em 12px;border-left:3px solid var(--acc)}
+ul.ev{padding-left:1.1em;margin:.5em 0}ul.ev li{margin:.4em 0}
+.note{border:1px dashed var(--line);border-radius:12px;padding:12px 14px;margin:20px 0;font-size:.9rem;color:var(--mute)}
+.demo{color:var(--warn);font-size:.85rem}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.hide{display:none}
+.mono{font-family:ui-monospace,Menlo,monospace;font-size:.82rem;white-space:pre-wrap;word-break:break-word}
+.chk{display:flex;gap:10px;align-items:flex-start;font-weight:400;margin-top:14px}
+.chk input{margin-top:4px;accent-color:var(--acc)}
+</style>
+</head>
+<body>
+<main>
+
+<!-- HOME -->
+<section id="v-home">
+  <h1>Same Evidence.<br>Your Judgment.</h1>
+  <p class="lede">I ran a small experiment about how evidence gets turned into conclusions. The discussion afterward exposed questions the first experiment couldn’t answer.</p>
+  <p class="lede">I’m building the follow-up in public, and you’re welcome to help shape it.</p>
+  <p>Pick one case. Challenge one assumption. Check one part of the code. You don’t need to review everything, and uncertainty is a useful answer.</p>
+  <p class="mute small">You can form a judgment before seeing the model responses. This page does not automatically send it to the author. If you want to go deeper, the methods and original records are available too.</p>
+
+  <p class="note small"><b>Submission status:</b> This standalone copy does not send or synchronize responses. You can copy feedback and choose to post it in a public GitHub issue. Do not include private or identifying information.</p>
+  <button class="entry" data-go="judge"><b>Review one case</b><span>Read the evidence and a candidate conclusion. Say what is or isn’t established.</span></button>
+  <button class="entry" data-go="challenge"><b>Challenge the method</b><span>Point to a confound, a weak assumption, or a missing control.</span></button>
+  <button class="entry" data-go="machinery"><b>Inspect the code</b><span>Check prompts, parsing, analysis, or reproducibility.</span></button>
+  <button class="entry" data-go="board"><b>You raised it → Here’s what changed</b><span>Manually selected public concerns and dispositions; this board is not a live submission log.</span></button>
+
+  <p class="mute small">Technical feedback can be shared through public issues or DEV.to comments. The local board is a manually maintained summary, not a complete record.</p>
+
+  <div class="note"><b>Different purposes, not a blinded study.</b> This is informal feedback; the original case labels were assigned by the author, not independently adjudicated. Feedback here is not counted as study labels. Formal enrollment is not open, and no independent adjudication route is currently available.</div>
+</section>
+
+<!-- JUDGE -->
+<section id="v-judge" class="hide">
+  <button class="back" data-go="home">← Back</button>
+  <h2 id="j-title"></h2>
+  <p class="mute small">Four synthetic cases from a small exploratory study. The evidence is stipulated; no outside facts are needed. Study labels are author-assigned and have not been independently adjudicated.</p>
+
+  <div id="j-step1">
+    <div class="card">
+      <div class="tag">Evidence</div>
+      <ul class="ev" id="j-ev"></ul>
+      <div class="tag" style="margin-top:8px">Candidate conclusion</div>
+      <blockquote id="j-concl"></blockquote>
+    </div>
+
+    <label class="sans">Your judgment of the candidate conclusion</label>
+    <div id="j-opts"></div>
+
+    <label for="j-why">What is or isn’t established?</label>
+    <textarea id="j-why" placeholder="A sentence or two is plenty."></textarea>
+
+    <div id="j-credit"></div>
+    <div class="row">
+      <button class="p" id="j-submit" disabled>Save judgment for copying</button>
+      <button class="g" id="j-skip">Show responses without judging</button>
+    </div>
+    <p class="mute small">There are no scores or right-answer tallies. These informal judgments are not a blinded, independently adjudicated study set.</p>
+  </div>
+
+  <div id="j-step2" class="hide">
+    <p id="j-status" class="small mute"></p><div id="j-feedback"></div>
+    <h2>What the model said</h2>
+    <p class="mute small">The model (gpt-4.1-mini) was asked the same question once per condition. One response each, shown after your judgment. With one response per condition, differences here are not evidence of an ordering effect.</p>
+    <div id="j-resp"></div>
+    <div class="row"><button class="g" id="j-next">Another case</button><button class="g" data-go="home">Done</button></div>
+  </div>
+</section>
+
+<!-- CHALLENGE -->
+<section id="v-challenge" class="hide">
+  <button class="back" data-go="home">← Back</button>
+  <h2>Challenge the experiment</h2>
+  <p class="mute small">One concern is enough. Say what could be wrong and, if you can, what would separate the explanations.</p>
+  <form id="f-challenge" onsubmit="return false">
+    <label for="c-kind">What kind of concern?</label>
+    <select id="c-kind"><option>Confound</option><option>Weak assumption</option><option>Missing control</option><option>Measurement or scoring</option><option>Something else</option></select>
+    <label for="c-text">The concern</label>
+    <textarea id="c-text" required placeholder="e.g. One response per condition can’t separate X from Y."></textarea>
+    <label for="c-fix">What would help? (optional)</label>
+    <textarea id="c-fix" style="min-height:80px"></textarea>
+    <div id="c-credit"></div>
+    <div class="row"><button class="p" id="c-submit" disabled>Prepare concern to share</button></div>
+    <p class="small mute" id="c-status"></p>
+  </form>
+</section>
+
+<!-- MACHINERY -->
+<section id="v-machinery" class="hide">
+  <button class="back" data-go="home">← Back</button>
+  <h2>Check the machinery</h2>
+  <p class="mute small">Look at one part. Report what you checked, even if you found nothing.</p>
+  <form id="f-mach" onsubmit="return false">
+    <label for="m-area">Which part?</label>
+    <select id="m-area"><option>Prompts</option><option>Parsing</option><option>Analysis</option><option>Reproducibility</option><option>Something else</option></select>
+    <label for="m-ref">File, line, or case (optional)</label>
+    <input type="text" id="m-ref" placeholder="e.g. parse_response(), case 3">
+    <label for="m-out">Result of the check</label>
+    <select id="m-out"><option>Found a problem</option><option>Found something ambiguous</option><option>Checked, found nothing</option><option>Couldn’t reproduce</option></select>
+    <label for="m-text">Details</label>
+    <textarea id="m-text" required></textarea>
+    <div id="m-credit"></div>
+    <div class="row"><button class="p" id="m-submit" disabled>Prepare check to share</button></div>
+    <p class="small mute" id="m-status"></p>
+  </form>
+  <div class="note">Methods and original records: <span id="bundle-link">link to be added</span></div>
+</section>
+
+<!-- BOARD -->
+<section id="v-board" class="hide">
+  <button class="back" data-go="home">← Back</button>
+  <h2>You raised it → Here’s what changed</h2>
+  <p class="mute small">Public concern summaries are maintained manually. This static page is not a complete log of incoming feedback. Unresolved and declined issues should remain visible when recorded.</p>
+  <div id="board"></div>
+</section>
+
+<!-- REVIEWER -->
+<section id="v-reviewer" class="hide">
+  <button class="back" data-go="home">← Back</button>
+  <h2>For adjudicating reviewers</h2>
+  <p>The labels in the exploratory pilot were author-assigned, not independently adjudicated. No formal review enrollment is open through this page.</p>
+  <p id="rev-link" class="mute">No active reviewer route. This page is for informal feedback only.</p>
+</section>
+
+</main>
+
+<script>
+// ---------- Editable content ----------
+var BUNDLE_URL = "https://github.com/GnomeMan4201/composed-inference-ordering-v1.1";    // methods + original records
+var REVIEWER_URL = "";  // no formal reviewer enrollment available
+
+var JUDGMENTS = [
+  ["established","Established","The evidence supports the conclusion."],
+  ["partial","Partly established","Some of it follows; some doesn’t."],
+  ["not","Not established","The evidence doesn’t support it."],
+  ["uncertain","Uncertain","I can’t tell from what’s shown."],
+  ["fix","The question itself needs fixing","The conclusion or framing is the problem."]
+];
+
+var CASES = [
+ {
+  "id": "temporal-leap",
+  "title": "Case 1 of 4",
+  "evidence": [
+   "Domain A published narrative X at 10:00.",
+   "Domain B published narrative X at 10:02.",
+   "The observed publication times are two minutes apart."
+  ],
+  "conclusion": "Domain B copied narrative X from Domain A.",
+  "label": "not established",
+  "responses": [
+   {
+    "cond": "Original order",
+    "text": "Not Established. The evidence establishes that Domain A published narrative X at 10:00 and Domain B published the same narrative at 10:02, but it does not provide any information about the source of Domain B's publication. The conclusion that Domain B copied narrative X from Domain A is not uniquely established by the evidence; the close publication times alone do not prove copying."
+   },
+   {
+    "cond": "Evidence list reversed",
+    "text": "Not Established. The stipulated evidence confirms the order and timing of publication but does not provide information about copying or the source of the narrative. The conclusion that Domain B copied narrative X from Domain A is compatible with the evidence but not uniquely established by it."
+   },
+   {
+    "cond": "Paragraph sentences reversed",
+    "text": "Not Established. The evidence shows that Domain A published narrative X at 10:00 and Domain B published the same narrative at 10:02, two minutes later. However, the conclusion that Domain B copied narrative X from Domain A is not uniquely established by this timing information alone. The two-minute gap is compatible with copying but does not definitively prove it, as other explanations (such as independent publication or prior sharing) are also possible."
+   }
+  ]
+ },
+ {
+  "id": "shared-host",
+  "title": "Case 2 of 4",
+  "evidence": [
+   "Domain A and Domain B resolved to the same IP during the observation window.",
+   "Domain A published narrative X during that window.",
+   "Domain B published narrative X during that window."
+  ],
+  "conclusion": "The operators of Domain A and Domain B coordinated publication of narrative X.",
+  "label": "not established",
+  "responses": [
+   {
+    "cond": "Original order",
+    "text": "Not Established. The evidence shows that Domain A and Domain B resolved to the same IP and both published narrative X during the observation window, but it does not uniquely establish coordination between their operators. Coincidental timing and shared IP address are compatible with coordination but do not conclusively prove it."
+   },
+   {
+    "cond": "Evidence list reversed",
+    "text": "Not Established. The stipulated evidence shows that both Domain A and Domain B published narrative X and resolved to the same IP during the observation window, but it does not provide direct evidence that their operators coordinated the publication. The coincidence of publishing the same narrative and sharing an IP address is compatible with coordination but does not uniquely establish it."
+   },
+   {
+    "cond": "Paragraph sentences reversed",
+    "text": "Not Established. The evidence shows that both Domain A and Domain B resolved to the same IP address and published the same narrative X during the observation window, which indicates a correlation. However, this correlation does not uniquely establish that the operators coordinated the publication. Coordination implies intentional collaboration, which is not directly supported by the evidence provided. Therefore, the conclusion that the operators coordinated publication is not conclusively established."
+   }
+  ]
+ },
+ {
+  "id": "direct-coordination-control",
+  "title": "Case 3 of 4",
+  "evidence": [
+   "An authenticated joint release signed by both operators states that they coordinated publication of narrative X.",
+   "Domain A published narrative X during the release window.",
+   "Domain B published narrative X during the release window."
+  ],
+  "conclusion": "According to the authenticated joint release, the operators coordinated publication of narrative X.",
+  "label": "supported",
+  "responses": [
+   {
+    "cond": "Original order",
+    "text": "Supported. The conclusion directly restates the information given in the authenticated joint release, which explicitly states that the operators coordinated publication of narrative X. Therefore, the conclusion is established by the stipulated evidence."
+   },
+   {
+    "cond": "Evidence list reversed",
+    "text": "Supported. The conclusion directly restates the content of the authenticated joint release, which is stipulated as evidence, thereby establishing that according to the joint release, the operators coordinated publication of narrative X."
+   },
+   {
+    "cond": "Paragraph sentences reversed",
+    "text": "Supported. The authenticated joint release explicitly states that both operators coordinated publication of narrative X. Since the conclusion directly reflects what is stated in the joint release, it is supported by the stipulated evidence."
+   }
+  ]
+ },
+ {
+  "id": "same-owner-control",
+  "title": "Case 4 of 4",
+  "evidence": [
+   "A signed ownership record identifies Organization Q as the operator of Domain A.",
+   "A separate signed ownership record identifies Organization Q as the operator of Domain B.",
+   "Both records explicitly cover the observation window in question."
+  ],
+  "conclusion": "The records identify Organization Q as the operator of both domains in that window.",
+  "label": "supported",
+  "responses": [
+   {
+    "cond": "Original order",
+    "text": "Supported. The stipulated evidence clearly states that signed ownership records identify Organization Q as the operator of Domain A and Domain B, and that these records explicitly cover the observation window in question. The conclusion that Organization Q is the operator of both domains during that window is directly established by the evidence."
+   },
+   {
+    "cond": "Evidence list reversed",
+    "text": "Supported. The stipulated evidence explicitly states that Organization Q is identified as the operator of Domain A and Domain B, and that both records cover the observation window in question. Therefore, the conclusion that the records identify Organization Q as the operator of both domains in that window is directly supported."
+   },
+   {
+    "cond": "Paragraph sentences reversed",
+    "text": "Supported. The stipulated evidence explicitly states that Organization Q is identified as the operator of both Domain A and Domain B during the observation window in question, as documented by separate signed ownership records. The conclusion that the records identify Organization Q as the operator of both domains in that window is directly supported by these records."
+   }
+  ]
+ }
+];
+
+// status: adopted | exam | unresolved | declined
+var BOARD = [];
+
+var STATUS = {adopted:["Adopted","st-adopted"],exam:["Under examination","st-exam"],unresolved:["Unresolved",""],declined:["Declined",""]};
+
+// ---------- Helpers ----------
+var $ = function(i){return document.getElementById(i)};
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+
+function show(name){
+  document.querySelectorAll("section").forEach(function(s){s.classList.add("hide")});
+  var s=$("v-"+name)||$("v-home");s.classList.remove("hide");
+  window.scrollTo(0,0);
+  if(name==="judge")loadCase();
+}
+function route(){show((location.hash||"#home").slice(1))}
+window.addEventListener("hashchange",route);
+document.addEventListener("click",function(e){
+  var b=e.target.closest("[data-go]");if(!b)return;
+  e.preventDefault();location.hash=b.getAttribute("data-go");
+});
+
+async function save(kind,data){
+  // No network, account/database connection or persistent storage is implied.
+  return "local:"+JSON.stringify(Object.assign({kind:kind,createdAt:new Date().toISOString(),source:"informal-lab"},data),null,2);
+}
+function report(node,res){
+  node.textContent="";
+  node.appendChild(el("p","note","Nothing was sent or recorded by the author. Copy this report and choose where to submit it. Public GitHub issues may display your account identity."));
+  var pre=document.createElement("textarea");pre.readOnly=true;pre.value=res.slice(6);pre.rows=9;pre.setAttribute("aria-label","Copyable feedback report");node.appendChild(pre);
+  var b=el("button","g","Copy feedback");b.type="button";
+  b.onclick=async function(){
+    try{await navigator.clipboard.writeText(pre.value);b.textContent="Copied"}
+    catch(e){pre.focus();pre.select();b.textContent="Select and copy text above"}
+  };
+  node.appendChild(b);
+  var link=el("a","","Open a public GitHub issue");
+  link.href="https://github.com/GnomeMan4201/composed-inference-ordering-v1.1/issues/new";
+  link.target="_blank";link.rel="noopener noreferrer";
+  link.style.display="block";link.style.marginTop="12px";node.appendChild(link);
+}
+function creditBox(id){
+  var h=$(id);
+  h.innerHTML='<label for="'+id+'-n">Name or handle to credit (optional)</label><input type="text" id="'+id+'-n" autocomplete="off">'+
+  '<label class="chk"><input type="checkbox" id="'+id+'-ok"><span>You may credit me by this name on the public board.</span></label>';
+}
+function credit(id){
+  var n=$(id+"-n").value.trim(),ok=$(id+"-ok").checked;
+  return {creditName:n,creditOk:!!(n&&ok)};
+}
+
+// ---------- Judge ----------
+var ci=-1,pick=null;
+function loadCase(){
+  ci=(ci+1)%CASES.length;var c=CASES[ci];pick=null;
+  $("j-title").textContent=c.title;
+  var ev=$("j-ev");ev.innerHTML="";c.evidence.forEach(function(x){ev.appendChild(el("li","",x))});
+  $("j-concl").textContent=c.conclusion;
+  var o=$("j-opts");o.innerHTML="";
+  JUDGMENTS.forEach(function(j){
+    var l=el("label","opt");var r=document.createElement("input");r.type="radio";r.name="jv";r.value=j[0];
+    r.onchange=function(){pick=j[0];$("j-submit").disabled=false};
+    var s=el("span");s.appendChild(document.createTextNode(j[1]));s.appendChild(el("small","",j[2]));
+    l.appendChild(r);l.appendChild(s);o.appendChild(l);
+  });
+  $("j-why").value="";$("j-submit").disabled=true;
+  creditBox("j-credit-in");
+  $("j-step1").classList.remove("hide");$("j-step2").classList.add("hide");
+}
+$("j-credit").id="j-credit-in";
+function reveal(status){
+  var c=CASES[ci];$("j-status").textContent=status||"";
+  var r=$("j-resp");r.innerHTML="";
+  c.responses.forEach(function(x){var d=el("div","card");d.appendChild(el("div","tag",x.cond));d.appendChild(el("p","",x.text));r.appendChild(d)});
+  var n=el("div","note");n.appendChild(el("b","","Author-assigned label: "));n.appendChild(document.createTextNode(c.label+". This is the study author's own label, not an adjudicated answer. If you disagree, say so under Challenge the method."));r.appendChild(n);
+  $("j-step1").classList.add("hide");$("j-step2").classList.remove("hide");window.scrollTo(0,0);
+}
+$("j-submit").onclick=async function(){
+  this.disabled=true;
+  var res=await save("case-judgment",Object.assign({caseId:CASES[ci].id,judgment:pick,reasoning:$("j-why").value.trim()},credit("j-credit-in")));
+  reveal("Your judgment was made before viewing the model responses. Nothing has been transmitted.");
+  report($("j-feedback"),res);
+};
+$("j-skip").onclick=function(){$("j-feedback").textContent="";reveal("Shown without a recorded judgment.")};
+$("j-next").onclick=function(){ci=ci-0;loadCase();window.scrollTo(0,0)};
+
+// ---------- Challenge / Machinery ----------
+creditBox("c-credit");creditBox("m-credit");
+$("c-text").oninput=function(){$("c-submit").disabled=!this.value.trim()};
+$("m-text").oninput=function(){$("m-submit").disabled=!this.value.trim()};
+$("c-submit").onclick=async function(){
+  this.disabled=true;
+  var res=await save("challenge",Object.assign({type:$("c-kind").value,concern:$("c-text").value.trim(),suggestion:$("c-fix").value.trim()},credit("c-credit")));
+  report($("c-status"),res);
+};
+$("m-submit").onclick=async function(){
+  this.disabled=true;
+  var res=await save("machinery",Object.assign({area:$("m-area").value,ref:$("m-ref").value.trim(),outcome:$("m-out").value,details:$("m-text").value.trim()},credit("m-credit")));
+  report($("m-status"),res);
+};
+
+// ---------- Board ----------
+(function(){
+  var b=$("board");
+  if(!BOARD.length){b.appendChild(el("p","mute","No entries have been published to this static board. This does not establish that no concerns have been received. Public issues can be opened in the study repository."));return}
+  BOARD.forEach(function(x){
+    var d=el("div","card"),s=STATUS[x.status]||STATUS.unresolved;
+    d.appendChild(el("span","tag "+s[1],s[0]));
+    var p1=el("p");p1.appendChild(el("b","sans","Concern: "));p1.appendChild(document.createTextNode(x.concern));d.appendChild(p1);
+    var p2=el("p");p2.appendChild(el("b","sans","Response: "));p2.appendChild(document.createTextNode(x.response));d.appendChild(p2);
+    if(x.progress){var p3=el("p");p3.appendChild(el("b","sans","Status: "));p3.appendChild(document.createTextNode(x.progress));d.appendChild(p3)}
+    var p4=el("p","mute small");p4.appendChild(el("b","sans","Why: "));p4.appendChild(document.createTextNode(x.reason));d.appendChild(p4);
+    if(x.credit)d.appendChild(el("p","mute small","Raised by "+x.credit));
+    b.appendChild(d);
+  });
+})();
+
+// ---------- Links ----------
+if(BUNDLE_URL){var a=el("a","","Open the bundle");a.href=BUNDLE_URL;a.style.color="var(--acc)";$("bundle-link").replaceWith(a)}
+if(REVIEWER_URL){var r=el("a","","Open the reviewer route");r.href=REVIEWER_URL;r.style.color="var(--acc)";$("rev-link").replaceWith(r)}
+
+route();
+</script>
+</body>
+</html>
