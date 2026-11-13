@@ -6,6 +6,11 @@ Committed before the second labeler's labels were seen.
 - Labeler 1: GnomeMan4201. Labels committed as a hash; file published after Labeler 2 posts.
 - Labeler 2: Rudratosh Shastri. Labels via GitHub issue, blind to Labeler 1's labels.
 
+## Which labels count as Labeler 1
+Added Nov 13, 2026, before Labeler 2's labels were posted.
+- Labeler 1's labels are the hashed set in `LABELER1_COMMITMENT.md`. These are the labels compared with Labeler 2's.
+- The draft labels in `cases.json` (Nov 11) are a reference only. Any case where they differ from Labeler 1's committed labels is reported and goes through the same outcomes below.
+
 ## Case outcomes
 Every case ends in exactly one of these:
 
